@@ -1,3 +1,21 @@
 body {
   background-image: url(img/footer_lodyas.png);
 }
+
+input {
+  font-size: 26px;
+  font-weight: 400;
+  color: #2874a7;
+  /*align-self: center;
+  align-items: center;*/
+  margin: 0 auto;
+  padding: 8px;
+}
+
+#inputBox {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+
+}

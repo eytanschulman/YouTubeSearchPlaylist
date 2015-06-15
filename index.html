@@ -1,14 +1,22 @@
 <!DOCTYPE=html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="css/main.css">
   <style>
   body {
     background-image: url(img/footer_lodyas.png);
   }
-  </<style>
   </style>
 </head>
 <body>
-
+ <div id="inputBox">
+ <input type="text" name="Search" placeholder="Search" id="searchBox" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
+ <input type="button" id="btnSearch" value="Search" onclick="doSomething();" />
+ </div>
 </body>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+
+</script>
 </html>
