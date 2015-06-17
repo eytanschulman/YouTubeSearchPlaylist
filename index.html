@@ -2,65 +2,56 @@
 <html>
 <head>
 
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="http://www.youtube.com/player_api"></script>
-<script src="js/materialize.min.js"></script>
-<script src="js/main.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="http://www.youtube.com/player_api"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
 
-<link rel="stylesheet" href="css/materialize.min.css">
-<link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-    <div class="container">
-        <div id="inputBox">
-            <input type="text" name="Search" placeholder="Search" id="searchBox" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
-            <input type="button" id="btnSearch" value="Search" onclick="doSomething();"/>
-            <input type="button" id="btnReset" value="Reset" onclick="reset();"/>
-            <p id="nav-text"> Use the left and right arrow keys to go to the next and previous videos </p>
-        </div>
+    <div class="row top-row">
 
-        <div class="row top-row">
+        <div class="col s7" style="background: red;">
 
-            <div class="col s7" style="background: red;">
-
-                <div id="video-container">
-                    <div id="videoPlayer">
-                        //
-                    </div>
+            <div id="video-container">
+                <div id="videoPlayer">
+                    //
                 </div>
-
             </div>
-            <div class="col s5">
 
-                <div class="side-area">
-                    <div class="search-area">
-                        <div class="row">
-                            <!-- Search bar -->
-                            <div class="input-field col s12 white-text">
-                                <i class="mdi-action-search prefix white-text"></i>
-                                <input id="search-query" type="text" class="validate">
-                                <label for="search-query">YouTube Search</label>
-                            </div>
-                        </div>
-                    </div>
+        </div>
+        <div class="col s5">
 
-                    <div class="playlist-area">
-                        <div class="playlist-details">
-                            <!-- Controls -->
-                            <h3 id="pld-title">Make a search</h3>
-                            <p id="pld-description">Go ahead, try "Coldplay Midnight cover"!</p>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="video-controls">
-                            <a id="vc-previous" class="waves-effect waves-light btn red"><i class="mdi-av-skip-previous"></i></a>
-                            <a id="vc-next" class="waves-effect waves-light btn red"><i class="mdi-av-skip-next"></i></a>
-                            <a id="vc-repeat" class="waves-effect waves-light btn red"><i class="mdi-av-replay"></i></a>
-                            <a id="vc-shuffle" class="waves-effect waves-light btn red"><i class="mdi-av-shuffle"></i></a>
+            <div class="side-area">
+                <div class="search-area">
+                    <div class="row">
+                        <!-- Search bar -->
+                        <div class="input-field col s12 white-text">
+                            <i class="mdi-action-search prefix white-text"></i>
+                            <input id="search-query" type="text" class="validate">
+                            <label for="search-query">YouTube Search</label>
                         </div>
                     </div>
                 </div>
 
+                <div class="playlist-area">
+                    <div class="playlist-details">
+                        <!-- Controls -->
+                        <h3 id="pld-title">Make a search</h3>
+                        <p id="pld-description">Go ahead, try "Coldplay Midnight cover"!</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="video-controls">
+                        <a id="vc-previous" class="waves-effect waves-light btn red"><i class="mdi-av-skip-previous"></i></a>
+                        <a id="vc-next" class="waves-effect waves-light btn red"><i class="mdi-av-skip-next"></i></a>
+                        <a id="vc-repeat" class="waves-effect waves-light btn red"><i class="mdi-av-replay"></i></a>
+                        <a id="vc-shuffle" class="waves-effect waves-light btn red"><i class="mdi-av-shuffle"></i></a>
+                        <a id="vc-reset" class="waves-effect waves-light btn red"><i class="mdi-content-remove-circle"></i></a>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -70,27 +61,32 @@
 
     <script>
 
-        $("#search-query").on("keydown",function(event){
-            if(event.keyCode === 13) {
-                console.log("SEARCH QUERY REQUESTED");
-                var query = $("#search-query").val();
-                $("#pld-title").html(query);
-                $("#pld-description").html("Search results for \'"+query+"\', made into a playlist.");
-                doSomething(query);
-            }
-        });
+    $("#search-query").on("keydown",function(event){
+        if(event.keyCode === 13) {
+            console.log("SEARCH QUERY REQUESTED");
+            var query = $("#search-query").val();
+            $("#pld-title").html(query);
+            $("#pld-description").html("Search results for \'"+query+"\', made into a playlist.");
+            doSomething(query);
+        }
+    });
 
-        $("#vc-previous").on("click tap",function(event){
-            console.log("PREVIOUS VIDEO REQUESTED");
-            currentIndex -= 1;
-            loadViewWithIndex(currentIndex);
-        });
+    $("#vc-previous").on("click tap",function(event){
+        console.log("PREVIOUS VIDEO REQUESTED");
+        currentIndex -= 1;
+        loadViewWithIndex(currentIndex);
+    });
 
-        $("#vc-next").on("click tap",function(event){
-            console.log("NEXT VIDEO REQUESTED");
-            currentIndex += 1;
-            loadViewWithIndex(currentIndex);
-        });
+    $("#vc-next").on("click tap",function(event){
+        console.log("NEXT VIDEO REQUESTED");
+        currentIndex += 1;
+        loadViewWithIndex(currentIndex);
+    });
+
+    $("#vc-reset").on("click tap",function(event){
+        console.log("PLAYER RESET REQUESTED");
+        reset();
+    })
 
     </script>
 
