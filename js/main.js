@@ -39,11 +39,6 @@ function onYouTubeIframeAPIReady() {
 }
 
 function loadViewWithIndex(index) {
-  if (index < 1) {
-
-    if(document.getElementById("videoPlayer") != undefined) {
-
-      console.log("Video Player exists");
 
       var iframes = document.getElementsByTagName('iframe');
       for (var i = 0; i < iframes.length; i++) {
@@ -54,40 +49,17 @@ function loadViewWithIndex(index) {
       var newDiv = document.createElement('div');
       newDiv.id = "videoPlayer";
       container.appendChild(newDiv);
+
+      var player = new YT.Player('videoPlayer', {
+                height: '390',
+                width: '640',
+                videoId: ""+videoIDArray[index],
+                events: {
+                  'onReady': onPlayerReady,
+                  'onStateChange': onPlayerStateChange
+                }
+              });
     }
-
-  var player = new YT.Player('videoPlayer', {
-              height: '390',
-              width: '640',
-              videoId: ""+videoIDArray[index],
-              events: {
-                'onReady': onPlayerReady,
-                'onStateChange': onPlayerStateChange
-              }
-            });
-    } else {
-
-      var iframes = document.getElementsByTagName('iframe');
-      for (var i = 0; i < iframes.length; i++) {
-        iframes[i].parentNode.removeChild(iframes[i]);
-      }
-
-    var container = document.getElementById("video-container");
-    var newDiv = document.createElement('div');
-    newDiv.id = "videoPlayer";
-    container.appendChild(newDiv);
-
-    var player = new YT.Player('videoPlayer', {
-                  height: '390',
-                  width: '640',
-                  videoId: ""+videoIDArray[index],
-                  events: {
-                    'onReady': onPlayerReady,
-                    'onStateChange': onPlayerStateChange
-                  }
-                });
-    }
-}
 
         function onPlayerReady(event) {
             event.target.playVideo();
@@ -101,3 +73,19 @@ function loadViewWithIndex(index) {
                 }
             }
         }
+
+$(document).keydown(function(event){
+    var key = event.which;
+            switch(key) {
+              case 37:
+                  // Key left.
+                  currentIndex -= 1;
+                  loadViewWithIndex(currentIndex);
+                  break;
+              case 39:
+                  // Key right.
+                  currentIndex += 1;
+                  loadViewWithIndex(currentIndex);
+                  break;
+        }
+  });
