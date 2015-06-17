@@ -38,6 +38,16 @@ function onYouTubeIframeAPIReady() {
   }
 }
 
+function reset() {
+  var iframes = document.getElementsByTagName('iframe');
+  for (var i = 0; i < iframes.length; i++) {
+    iframes[i].parentNode.removeChild(iframes[i]);
+  }
+  var searchBox = document.getElementById("searchBox");
+  searchBox.value = "";
+}
+
+
 function loadViewWithIndex(index) {
 
       var iframes = document.getElementsByTagName('iframe');
