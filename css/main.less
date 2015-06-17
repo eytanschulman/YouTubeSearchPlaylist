@@ -1,5 +1,7 @@
 // out: main.css
 
+@import "mixins.less";
+
 @jet-black: #1a1a1a;
 @nice-white: #f1f1f1;
 
@@ -10,9 +12,13 @@ body {
     background: @nice-white;
 }
 
+.top-row {
+    margin-top: 50px;
+}
+
 .side-area {
     background: @jet-black;
-
+    .no-select();
     .divider {
         width: 95%;
         margin-left: auto;
@@ -25,7 +31,15 @@ body {
     background: @jet-black;
     width: 100%;
     margin: 0;
-    padding-bottom: 20px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+
+    .row {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
 
     .input-field {
         input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
@@ -35,12 +49,6 @@ body {
         input[type=text]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=date]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
             color: @search-area-color;
         }
-    }
-
-
-    .video-controls {
-        padding-bottom: 10px;
-        text-align: center;
     }
 }
 
@@ -53,4 +61,33 @@ body {
     //border-top-style: solid;
     //border-top-color: @nice-white;
     color: white;
+
+    .playlist-details {
+
+        h3 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        p {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+
+    .divider {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+
+    .video-controls {
+        width: 100%;
+
+        .btn {
+            margin-right: 3px;
+        }
+
+    }
+
 }

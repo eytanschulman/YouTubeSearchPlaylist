@@ -1,8 +1,17 @@
 body {
   background: #f1f1f1;
 }
+.top-row {
+  margin-top: 50px;
+}
 .side-area {
   background: #1a1a1a;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .side-area .divider {
   width: 95%;
@@ -14,7 +23,14 @@ body {
   background: #1a1a1a;
   width: 100%;
   margin: 0;
-  padding-bottom: 20px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+.search-area .row {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 0;
 }
 .search-area .input-field input[type=text]:focus:not([readonly]),
 .search-area .input-field input[type=password]:focus:not([readonly]),
@@ -43,14 +59,29 @@ body {
 .search-area .input-field textarea.materialize-textarea:focus:not([readonly]) + label {
   color: #f44336;
 }
-.search-area .video-controls {
-  padding-bottom: 10px;
-  text-align: center;
-}
 .playlist-area {
   background: #1a1a1a;
   width: 100%;
   margin: 0;
   padding: 10px;
   color: white;
+}
+.playlist-area .playlist-details h3 {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.playlist-area .playlist-details p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.playlist-area .divider {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+.playlist-area .video-controls {
+  width: 100%;
+}
+.playlist-area .video-controls .btn {
+  margin-right: 3px;
 }

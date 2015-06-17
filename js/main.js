@@ -5,8 +5,9 @@ var currentIndex = 0;
 
 
 
-function doSomething() {
-    var searchBoxString = document.getElementById("searchBox").value;
+function doSomething(query) {
+    //var searchBoxString = document.getElementById("searchBox").value;
+    var searchBoxString = query;
 
     var test = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q= "+ searchBoxString + "&key=AIzaSyBRHqgKlw9i17BaQdcM91PCSw_J4x-6yoc";
 
