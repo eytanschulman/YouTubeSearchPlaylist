@@ -1,34 +1,70 @@
 <!DOCTYPE=html>
 <html>
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="http://www.youtube.com/player_api"></script>
-<script src="js/main.js"></script>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <style>
-  body {
-    background-image: url(img/footer_lodyas.png);
-  }
 
-  #nav-text {
-    color: white;
-  }
-  </style>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="http://www.youtube.com/player_api"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
+
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
- <div id="inputBox">
- <input type="text" name="Search" placeholder="Search" id="searchBox" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
- <input type="button" id="btnSearch" value="Search" onclick="doSomething();"/>
- <input type="button" id="btnReset" value="Reset" onclick="reset();"/>
- <p id="nav-text"> Use the left and right arrow keys to go to the next and previous videos </p>
- </div>
- <div id="video-container">
- <div id="videoPlayer">
 
- </div>
- </div>
+    <div class="container">
+        <div id="inputBox">
+            <input type="text" name="Search" placeholder="Search" id="searchBox" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
+            <input type="button" id="btnSearch" value="Search" onclick="doSomething();"/>
+            <input type="button" id="btnReset" value="Reset" onclick="reset();"/>
+            <p id="nav-text"> Use the left and right arrow keys to go to the next and previous videos </p>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col s8" style="background: red;">
+
+            <div id="video-container">
+                <div id="videoPlayer">
+                    //
+                </div>
+            </div>
+
+        </div>
+        <div class="col s4 m4">
+
+            <div class="side-area">
+                <div class="search-area">
+                    <div class="row">
+                        <!-- Search bar -->
+                        <div class="input-field col s12 white-text">
+                            <i class="mdi-action-search prefix white-text"></i>
+                            <input id="searchQuery" type="text" class="validate">
+                            <label for="searchQuery">YouTube Search</label>
+                        </div>
+                    </div>
+                    <div class="video-controls">
+                        <!-- Controls -->
+                        <a id="vc-previous" class="waves-effect waves-light btn red"><i class="mdi-av-skip-previous"></i></a>
+                        <a id="vc-pauseplay" class="waves-effect waves-light btn red"><i class="mdi-av-pause"></i></a>
+                        <a id="vc-next" class="waves-effect waves-light btn red"><i class="mdi-av-skip-next"></i></a>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="playlist-area">
+                    (list of videos in playlist)
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+    //
+
+    </script>
+
 </body>
-<script>
-
-</script>
 </html>
