@@ -1,4 +1,4 @@
-# YouTubeSearchPlaylist
+# YouTube Search Playlist
 A Website in-progress to let you view YouTube Search Queries as a playlist
 
 I had the idea for this website because I love listening to covers of songs, but I couldn't find a way to just listen to covers from YouTube
