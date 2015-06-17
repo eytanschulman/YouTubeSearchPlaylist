@@ -9,16 +9,21 @@
   body {
     background-image: url(img/footer_lodyas.png);
   }
+
+  #nav-text {
+    color: white;
+  }
   </style>
 </head>
 <body>
  <div id="inputBox">
  <input type="text" name="Search" placeholder="Search" id="searchBox" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
  <input type="button" id="btnSearch" value="Search" onclick="doSomething();"/>
+ <p id="nav-text"> Use the left and right arrow keys to go to the next and previous videos </p>
  </div>
  <div id="video-container">
  <div id="videoPlayer">
-   
+
  </div>
  </div>
 </body>
