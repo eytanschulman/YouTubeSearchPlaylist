@@ -1,34 +1,160 @@
 <!DOCTYPE=html>
 <html>
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="http://www.youtube.com/player_api"></script>
-<script src="js/main.js"></script>
 <head>
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <style>
-  body {
-    background-image: url(img/footer_lodyas.png);
-  }
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="http://www.youtube.com/player_api"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
 
-  #nav-text {
-    color: white;
-  }
-  </style>
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
- <div id="inputBox">
- <input type="text" name="Search" placeholder="Search" id="searchBox" onkeydown="if (event.keyCode == 13) document.getElementById('btnSearch').click()"/>
- <input type="button" id="btnSearch" value="Search" onclick="doSomething();"/>
- <input type="button" id="btnReset" value="Reset" onclick="reset();"/>
- <p id="nav-text"> Use the left and right arrow keys to go to the next and previous videos </p>
- </div>
- <div id="video-container">
- <div id="videoPlayer">
 
- </div>
- </div>
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">Austin Jackson</a></li>
+        <li><a href="#!">Eytan Schulman</a></li>
+    </ul>
+
+    <nav>
+        <div class="nav-wrapper red">
+            <a href="#!" class="brand-logo">YouTubeSearchPlaylist</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="https://github.com/au5ton/YouTubeSearchPlaylist/blob/gh-pages/HELP.md">Help</a></li>
+                <li><a href="https://github.com/au5ton/YouTubeSearchPlaylist/">Source code</a></li>
+                <li><a href="http://eytan.co/">Eytan Schulman</a></li>
+                <li><a href="http://austinj.net/">Austin Jackson</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="https://github.com/au5ton/YouTubeSearchPlaylist/blob/gh-pages/HELP.md">Help</a></li>
+                <li><a href="https://github.com/au5ton/YouTubeSearchPlaylist/">Source code</a></li>
+                <li><a class="author">Authors</a></li>
+                <li><a href="http://eytan.co/">Eytan Schulman</a></li>
+                <li><a href="http://austinj.net/">Austin Jackson</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="row top-row">
+
+        <div class="col s12 l7">
+
+            <div id="video-container" class="video-container">
+                <!-- <iframe id="videoPlayer" width="420" height="315" src="https://www.youtube.com/embed/kxopViU98Xo" frameborder="0" allowfullscreen></iframe> -->
+            </div>
+
+        </div>
+        <div class="col s12 l5">
+
+            <div class="side-area">
+                <div class="search-area">
+                    <div class="row">
+                        <!-- Search bar -->
+                        <div class="input-field col s12 white-text">
+                            <i class="mdi-action-search prefix white-text"></i>
+                            <input value="Coldplay Midnight cover" id="search-query" type="text" class="validate">
+                            <label for="search-query">YouTube Search</label>
+                        </div>
+                    </div>
+                    <div id="pld-loading" class="not-shown">
+                        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="playlist-area">
+                    <div class="playlist-details">
+                        <!-- Controls -->
+                        <h3 id="pld-title">Make a search</h3>
+                        <p id="pld-description">
+                            Go ahead, try "Coldplay Midnight cover"!
+                        </p>
+                        <p id="pld-progress" class="grey-text">
+                            Video 1/&infin;
+                        </p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="video-controls">
+                        <a id="vc-previous" class="waves-effect waves-light btn red"><i class="mdi-av-skip-previous"></i></a>
+                        <a id="vc-next" class="waves-effect waves-light btn red"><i class="mdi-av-skip-next"></i></a>
+                        <a id="vc-repeat" class="waves-effect waves-light btn red"><i class="mdi-av-repeat"></i></a>
+                        <a id="vc-shuffle" class="waves-effect waves-light btn red"><i class="mdi-av-shuffle"></i></a>
+                        <a id="vc-reset" class="waves-effect waves-light btn red"><i class="mdi-content-remove-circle"></i></a>
+                        <a id="vc-saveplaylist" class="waves-effect waves-light btn red"><i class="mdi-av-playlist-add"></i></a>
+                        <a id="vc-loadmore" class="waves-effect waves-light btn red"><i class="mdi-action-find-replace"></i></a>
+                    </div>
+                    <div class="divider"></div>
+                    <!-- TEMPLATE PLAYLIST ITEM -->
+                    <div id="playlist-preview-item-template">
+                        <div class="row not-shown">
+                            <div class="col s1 number">
+                                <p>{{PLAYLIST_NUMBER}}</p>
+                            </div>
+                            <div class="col s3 thumbnail">
+                                <img src="{{PLAYLIST_VIDEO_THUMBNAIL}}">
+                            </div>
+                            <div class="col s6 description">
+                                <p class="title truncate"><a href="https://www.youtube.com/watch?v={{PLAYLIST_VIDEO_ID}}">{{PLAYLIST_VIDEO_TITLE}}</a></p>
+                                <p class="author grey-text truncate"><a href="https://www.youtube.com/channel/{{PLAYLIST_VIDEO_AUTHOR_ID}}">{{PLAYLIST_VIDEO_AUTHOR}}</a></p>
+                            </div>
+                            <div class="col s2 playnow">
+                                <a class="btn-floating btn-small waves-effect waves-light red"><i class="mdi-av-play-circle-fill"></i></a>
+                            </div>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                    <div id="playlist-preview" class="playlist-preview">
+                        <!-- ACTUAL PLAYLIST ITEMS -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+    $(document).ready(function(){
+        $(".button-collapse").sideNav({
+            //menuWidth: 200 // Default is 240
+        });
+    });
+
+    $("#search-query").on("keydown",function(event){
+        if(event.keyCode === 13) {
+            console.log("SEARCH QUERY REQUESTED");
+            $("#pld-loading").removeClass("not-shown");
+            var query = $("#search-query").val();
+            $("#pld-title").html(query);
+            $("#pld-description").html("Search results for \'"+query+"\', made into a playlist.");
+
+            getPlaylistFromQuery(query,searchSuccessful);
+        }
+    });
+
+    $("#vc-previous").on("click tap",function(event){
+        console.log("PREVIOUS VIDEO REQUESTED");
+        currentIndex -= 1;
+        loadVideoWithIndex(currentIndex);
+    });
+
+    $("#vc-next").on("click tap",function(event){
+        console.log("NEXT VIDEO REQUESTED");
+        currentIndex += 1;
+        loadVideoWithIndex(currentIndex);
+    });
+
+    $("#vc-reset").on("click tap",function(event){
+        console.log("PLAYER RESET REQUESTED");
+        reset();
+    })
+
+    </script>
+
 </body>
-<script>
-
-</script>
 </html>
