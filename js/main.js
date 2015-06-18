@@ -1,106 +1,95 @@
 var videoIDArray = [];
 var currentIndex = 0;
+var maxResults = "50";
+var searchResults;
 
+var apiKey = "AIzaSyC5lG6cr07lMFM_NjAiL3M8kd0Kgmz92-I";
 
-
-
-
-function doSomething(query) {
-    //var searchBoxString = document.getElementById("searchBox").value;
-    var searchBoxString = query;
-
-    var test = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&q= "+ searchBoxString + "&key=AIzaSyBRHqgKlw9i17BaQdcM91PCSw_J4x-6yoc";
-
-    console.log(searchBoxString);
-    // console.log(doRequest("http://jsonip.com/"));
-    doRequest(test);
+function reset() {
+    $("#video-container").empty();
+    $("#search-query")[0].value = "";
+    $("#pld-title").html("Make a search");
+    $("#pld-description").html("Go ahead, try \"Coldplay Midnight cover\"!")
 }
 
+function getPlaylistFromQuery(query,callback) {
 
+    var requestUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults="+maxResults+"&q= "+query+"&key="+apiKey;
 
-function doRequest(url) {
-    $.get(url, function(data, status){
-        console.log("status: "+ status);
+    if(callback === undefined && typeof callback !== "function") {
+        callback =  function(){};
+    }
 
-        var jsonData = JSON.parse(JSON.stringify(data));
-
-        videoIDArray = [];
-
-        for (var i=0; i<jsonData.items.length;i++) {
-            videoIDArray.push(jsonData.items[i].id.videoId);
+    $.ajax({
+        url: requestUrl,
+        success: function(data){
+            searchResults = data;
+        },
+        complete: function(){
+            callback(); //Calls searchSuccessful()
         }
-
-        console.log("videoIDArray: "+videoIDArray);
-
-        loadViewWithIndex(0);
-
     });
 }
 
-function onYouTubeIframeAPIReady() {
-    if (videoIDArray[0]) {
-        loadViewWithIndex(currentIndex);
-    } else {
-        console.log("There's no data in videoIDArray yet.");
+function searchSuccessful() {
+    if(searchResults === undefined) {
+        console.error("Search was unsuccessful."); //This line is kind of ironic
+    }
+    else {
+
+        videoIDArray = [];
+
+        for (var i=0; i<searchResults.items.length;i++) {
+            if(searchResults.items[i].id.kind === "youtube#video") {
+                videoIDArray.push(searchResults.items[i].id.videoId);
+            }
+        }
+        console.log(videoIDArray)
+        if(currentIndex === 0) {
+            loadVideoWithIndex(0);
+        }
     }
 }
 
-function reset() {
-    var iframes = document.getElementsByTagName('iframe');
-    for (var i = 0; i < iframes.length; i++) {
-        iframes[i].parentNode.removeChild(iframes[i]);
-    }
-    var searchBox = document.getElementById("searchBox");
-    searchBox.value = "";
-}
+function loadVideoWithIndex(index) {
 
+    var container = $("#video-container");
 
-function loadViewWithIndex(index) {
+    container.empty();
 
-    var iframes = document.getElementsByTagName('iframe');
-    for (var i = 0; i < iframes.length; i++) {
-        iframes[i].parentNode.removeChild(iframes[i]);
-    }
-
-    var container = document.getElementById("video-container");
-    var newDiv = document.createElement('div');
-    newDiv.id = "videoPlayer";
-    container.appendChild(newDiv);
+    var tempDiv = document.createElement('div');
+    tempDiv.id = "videoPlayer";
+    container.append(tempDiv);
 
     var player = new YT.Player('videoPlayer', {
         videoId: ""+videoIDArray[index],
         events: {
             'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+
         }
     });
 }
 
 function onPlayerReady(event) {
     event.target.playVideo();
+    $("#pld-progress").html("Video "+(currentIndex+1)+"/"+videoIDArray.length);
 }
 
 function onPlayerStateChange(event) {
+    console.log(event);
+    if(event.data === 1) {
+        //If the video starts playing
+        $("#pld-loading").addClass("not-shown");
+    }
     if(event.data === 0) {
         if (currentIndex < videoIDArray.length) {
             currentIndex++;
-            loadViewWithIndex(currentIndex);
+            loadVideoWithIndex(currentIndex);
+        } else if(currentIndex === videoIDArray.length-1){
+            //If it's the last video in the result list...
+
+            //Reload some more results and append them to the videoIDArray
         }
     }
 }
-
-$(document).keydown(function(event){
-    var key = event.which;
-    switch(key) {
-        case 37:
-        // Key left.
-        currentIndex -= 1;
-        loadViewWithIndex(currentIndex);
-        break;
-        case 39:
-        // Key right.
-        currentIndex += 1;
-        loadViewWithIndex(currentIndex);
-        break;
-    }
-});

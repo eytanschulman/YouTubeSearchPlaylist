@@ -1,5 +1,6 @@
 // out: main.css
 
+@import "spinner.less";
 @import "mixins.less";
 
 @jet-black: #1a1a1a;
@@ -14,6 +15,10 @@ body {
 
 .top-row {
     margin-top: 50px;
+}
+
+#video-container {
+    background: radial-gradient(circle 500px, #555, @jet-black);
 }
 
 .side-area {
@@ -50,6 +55,13 @@ body {
             color: @search-area-color;
         }
     }
+
+    #pld-loading svg {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        margin-top: 10px;
+    }
 }
 
 .playlist-area {
@@ -71,6 +83,12 @@ body {
         p {
             margin-top: 0;
             margin-bottom: 0;
+        }
+
+        #pld-progress {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-style: italic;
         }
     }
 

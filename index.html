@@ -2,24 +2,22 @@
 <html>
 <head>
 
-    <script src="js/jquery-2.1.4.min.js"></script>
-    <script src="http://www.youtube.com/player_api"></script>
-    <script src="js/materialize.min.js"></script>
-    <script src="js/main.js"></script>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="http://www.youtube.com/player_api"></script>
+<script src="js/materialize.min.js"></script>
+<script src="js/main.js"></script>
 
-    <link rel="stylesheet" href="css/materialize.min.css">
-    <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/materialize.min.css">
+<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
     <div class="row top-row">
 
-        <div class="col s7" style="background: red;">
+        <div class="col s7">
 
-            <div id="video-container">
-                <div id="videoPlayer">
-                    //
-                </div>
+            <div id="video-container" class="video-container">
+                <!-- <iframe id="videoPlayer" width="420" height="315" src="https://www.youtube.com/embed/kxopViU98Xo" frameborder="0" allowfullscreen></iframe> -->
             </div>
 
         </div>
@@ -31,9 +29,14 @@
                         <!-- Search bar -->
                         <div class="input-field col s12 white-text">
                             <i class="mdi-action-search prefix white-text"></i>
-                            <input id="search-query" type="text" class="validate">
+                            <input value="Coldplay Midnight cover" id="search-query" type="text" class="validate">
                             <label for="search-query">YouTube Search</label>
                         </div>
+                    </div>
+                    <div id="pld-loading" class="not-shown">
+                        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                           <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                        </svg>
                     </div>
                 </div>
 
@@ -41,15 +44,21 @@
                     <div class="playlist-details">
                         <!-- Controls -->
                         <h3 id="pld-title">Make a search</h3>
-                        <p id="pld-description">Go ahead, try "Coldplay Midnight cover"!</p>
+                        <p id="pld-description">
+                            Go ahead, try "Coldplay Midnight cover"!
+                        </p>
+                        <p id="pld-progress" class="grey-text">
+                            Video 1/&infin;, example video
+                        </p>
                     </div>
                     <div class="divider"></div>
                     <div class="video-controls">
                         <a id="vc-previous" class="waves-effect waves-light btn red"><i class="mdi-av-skip-previous"></i></a>
                         <a id="vc-next" class="waves-effect waves-light btn red"><i class="mdi-av-skip-next"></i></a>
-                        <a id="vc-repeat" class="waves-effect waves-light btn red"><i class="mdi-av-replay"></i></a>
+                        <a id="vc-repeat" class="waves-effect waves-light btn red"><i class="mdi-av-repeat"></i></a>
                         <a id="vc-shuffle" class="waves-effect waves-light btn red"><i class="mdi-av-shuffle"></i></a>
                         <a id="vc-reset" class="waves-effect waves-light btn red"><i class="mdi-content-remove-circle"></i></a>
+                        <a id="vc-loadmore" class="waves-effect waves-light btn red"><i class="mdi-action-find-replace"></i></a>
                     </div>
                 </div>
             </div>
@@ -64,23 +73,25 @@
     $("#search-query").on("keydown",function(event){
         if(event.keyCode === 13) {
             console.log("SEARCH QUERY REQUESTED");
+            $("#pld-loading").removeClass("not-shown");
             var query = $("#search-query").val();
             $("#pld-title").html(query);
             $("#pld-description").html("Search results for \'"+query+"\', made into a playlist.");
-            doSomething(query);
+
+            getPlaylistFromQuery(query,searchSuccessful);
         }
     });
 
     $("#vc-previous").on("click tap",function(event){
         console.log("PREVIOUS VIDEO REQUESTED");
         currentIndex -= 1;
-        loadViewWithIndex(currentIndex);
+        loadVideoWithIndex(currentIndex);
     });
 
     $("#vc-next").on("click tap",function(event){
         console.log("NEXT VIDEO REQUESTED");
         currentIndex += 1;
-        loadViewWithIndex(currentIndex);
+        loadVideoWithIndex(currentIndex);
     });
 
     $("#vc-reset").on("click tap",function(event){
