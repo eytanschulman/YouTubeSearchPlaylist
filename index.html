@@ -2,13 +2,13 @@
 <html>
 <head>
 
-<script src="js/jquery-2.1.4.min.js"></script>
-<script src="http://www.youtube.com/player_api"></script>
-<script src="js/materialize.min.js"></script>
-<script src="js/main.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="http://www.youtube.com/player_api"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/main.js"></script>
 
-<link rel="stylesheet" href="css/materialize.min.css">
-<link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/materialize.min.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
@@ -35,7 +35,7 @@
                     </div>
                     <div id="pld-loading" class="not-shown">
                         <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                           <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
                         </svg>
                     </div>
                 </div>
@@ -59,6 +59,29 @@
                         <a id="vc-shuffle" class="waves-effect waves-light btn red"><i class="mdi-av-shuffle"></i></a>
                         <a id="vc-reset" class="waves-effect waves-light btn red"><i class="mdi-content-remove-circle"></i></a>
                         <a id="vc-loadmore" class="waves-effect waves-light btn red"><i class="mdi-action-find-replace"></i></a>
+                    </div>
+                    <div class="divider"></div>
+                    <!-- TEMPLATE PLAYLIST ITEM -->
+                    <div id="playlist-preview-item-template">
+                        <div class="row not-shown">
+                            <div class="col s1 number">
+                                <p>{{PLAYLIST_NUMBER}}</p>
+                            </div>
+                            <div class="col s3 thumbnail">
+                                <img src="{{PLAYLIST_VIDEO_THUMBNAIL}}">
+                            </div>
+                            <div class="col s6 description">
+                                <p class="title truncate"><a href="https://www.youtube.com/watch?v={{PLAYLIST_VIDEO_ID}}">{{PLAYLIST_VIDEO_TITLE}}</a></p>
+                                <p class="author grey-text truncate"><a href="https://www.youtube.com/channel/{{PLAYLIST_VIDEO_AUTHOR_ID}}">{{PLAYLIST_VIDEO_AUTHOR}}</a></p>
+                            </div>
+                            <div class="col s2 playnow">
+                                <a class="btn-floating btn-small waves-effect waves-light red"><i class="mdi-av-play-circle-fill"></i></a>
+                            </div>
+                            <div class="divider"></div>
+                        </div>
+                    </div>
+                    <div id="playlist-preview" class="playlist-preview">
+                        <!-- ACTUAL PLAYLIST ITEMS -->
                     </div>
                 </div>
             </div>

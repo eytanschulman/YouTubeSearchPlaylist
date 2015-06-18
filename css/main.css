@@ -103,18 +103,13 @@ body {
 }
 .top-row {
   margin-top: 50px;
+  min-width: 1340px;
 }
 #video-container {
   background: radial-gradient(circle 500px, #555555, #1a1a1a);
 }
 .side-area {
   background: #1a1a1a;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 .side-area .divider {
   width: 95%;
@@ -198,4 +193,46 @@ body {
 }
 .playlist-area .video-controls .btn {
   margin-right: 3px;
+}
+.playlist-area .playlist-preview {
+  max-height: 500px;
+  overflow-y: scroll;
+}
+.playlist-area .playlist-preview .row {
+  max-height: 80px;
+  margin-bottom: 0px;
+  max-width: 600px;
+  margin-left: 0;
+}
+.playlist-area .playlist-preview .thumbnail img {
+  display: block;
+  height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.playlist-area .playlist-preview .description .title {
+  margin-bottom: 0;
+  line-height: 1.2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.playlist-area .playlist-preview .description .author {
+  margin-top: 5px;
+  font-size: 1.0rem;
+  line-height: 1.0rem;
+}
+.playlist-area .playlist-preview .playnow {
+  height: 80px;
+}
+.playlist-area .playlist-preview .playnow a {
+  margin-left: auto;
+  margin-right: auto;
+  display: block!important;
+  margin-top: 20px;
+}
+.playlist-area .playlist-preview .divider {
+  margin-left: 0;
+  width: 100%;
+  background-color: #525252;
+  border-bottom-color: #525252;
 }
