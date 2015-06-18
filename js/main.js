@@ -12,9 +12,10 @@ var apiKey = "AIzaSyC5lG6cr07lMFM_NjAiL3M8kd0Kgmz92-I";
 
 function reset() {
     $("#video-container").empty();
+    $("#playlist-preview").empty();
     $("#search-query")[0].value = "";
     $("#pld-title").html("Make a search");
-    $("#pld-description").html("Go ahead, try \"Coldplay Midnight cover\"!")
+    $("#pld-description").html("Go ahead, try \"Coldplay Midnight cover\"!");
 }
 
 function getPlaylistFromQuery(query,callback) {

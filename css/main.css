@@ -101,9 +101,14 @@
 body {
   background: #f1f1f1;
 }
+.head-title {
+  margin-bottom: 0;
+}
+.head-subtitle {
+  margin-top: 0;
+}
 .top-row {
   margin-top: 50px;
-  min-width: 1340px;
 }
 #video-container {
   background: radial-gradient(circle 500px, #555555, #1a1a1a);
@@ -193,6 +198,7 @@ body {
 }
 .playlist-area .video-controls .btn {
   margin-right: 3px;
+  margin-bottom: 6px;
 }
 .playlist-area .playlist-preview {
   max-height: 500px;
@@ -201,7 +207,6 @@ body {
 .playlist-area .playlist-preview .row {
   max-height: 80px;
   margin-bottom: 0px;
-  max-width: 600px;
   margin-left: 0;
 }
 .playlist-area .playlist-preview .thumbnail img {

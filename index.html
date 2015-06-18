@@ -1,7 +1,7 @@
 <!DOCTYPE=html>
 <html>
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="js/jquery-2.1.4.min.js"></script>
     <script src="http://www.youtube.com/player_api"></script>
     <script src="js/materialize.min.js"></script>
@@ -12,16 +12,35 @@
 </head>
 <body>
 
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Logo</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="components.html">Components</a></li>
+                <li><a href="javascript.html">Javascript</a></li>
+                <li><a href="mobile.html">Mobile</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a href="components.html">Components</a></li>
+                <li><a href="javascript.html">Javascript</a></li>
+                <li><a href="mobile.html">Mobile</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="row top-row">
 
-        <div class="col s7">
+        <div class="col s12 l7">
 
             <div id="video-container" class="video-container">
                 <!-- <iframe id="videoPlayer" width="420" height="315" src="https://www.youtube.com/embed/kxopViU98Xo" frameborder="0" allowfullscreen></iframe> -->
             </div>
 
         </div>
-        <div class="col s5">
+        <div class="col s12 l5">
 
             <div class="side-area">
                 <div class="search-area">
@@ -58,6 +77,7 @@
                         <a id="vc-repeat" class="waves-effect waves-light btn red"><i class="mdi-av-repeat"></i></a>
                         <a id="vc-shuffle" class="waves-effect waves-light btn red"><i class="mdi-av-shuffle"></i></a>
                         <a id="vc-reset" class="waves-effect waves-light btn red"><i class="mdi-content-remove-circle"></i></a>
+                        <a id="vc-saveplaylist" class="waves-effect waves-light btn red"><i class="mdi-av-playlist-add"></i></a>
                         <a id="vc-loadmore" class="waves-effect waves-light btn red"><i class="mdi-action-find-replace"></i></a>
                     </div>
                     <div class="divider"></div>
@@ -92,6 +112,10 @@
 
 
     <script>
+
+    $(document).ready(function(){
+        $(".button-collapse").sideNav();
+    });
 
     $("#search-query").on("keydown",function(event){
         if(event.keyCode === 13) {
