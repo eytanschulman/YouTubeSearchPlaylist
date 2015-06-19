@@ -8,4 +8,5 @@ MNI = idea, May Never Implement
 - [ ] Repeat (all 3 modes) support
 - [ ] Suffle support
 - [ ] Load more results functionality
+- [ ] Edit loaded playlist functionality
 - [ ] Save playlist to YouTube (MNI)
