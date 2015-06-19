@@ -6,4 +6,4 @@ search results one after another. I also have never used JS that much, so I thou
 
 You can view it [here.](http://eytanschulman.github.io/YouTubeSearchPlaylist/) 
 
-See [TODO.md](todo.md).
+See [TODO.md](https://github.com/au5ton/YouTubeSearchPlaylist/blob/gh-pages/TODO.md).
