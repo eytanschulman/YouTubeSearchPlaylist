@@ -101,14 +101,11 @@ function loadVideoWithIndex(index) {
 function onPlayerReady(event) {
     event.target.playVideo();
     $("#pld-progress").html("Video "+(currentIndex+1)+"/"+playlist.length);
+    $("#pld-loading").addClass("not-shown");
 }
 
 function onPlayerStateChange(event) {
-    //console.log(event);
-    if(event.data === 1) {
-        //If the video starts playing
-        $("#pld-loading").addClass("not-shown");
-    }
+    $("#pld-loading").addClass("not-shown");
     if(event.data === 0) {
         if (currentIndex < playlist.length) {
             currentIndex++;
