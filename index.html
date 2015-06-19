@@ -12,11 +12,6 @@
 </head>
 <body>
 
-    <ul id="dropdown1" class="dropdown-content">
-        <li><a href="#!">Austin Jackson</a></li>
-        <li><a href="#!">Eytan Schulman</a></li>
-    </ul>
-
     <nav>
         <div class="nav-wrapper red">
             <a href="#!" class="brand-logo">YouTubeSearchPlaylist</a>
@@ -59,9 +54,11 @@
                         </div>
                     </div>
                     <div id="pld-loading" class="not-shown">
-                        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
-                        </svg>
+                        <div class="loader">
+                            <svg class="spinner">
+                                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="5" stroke-miterlimit="10"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
 
@@ -85,6 +82,14 @@
                         <a id="vc-reset" class="waves-effect waves-light btn red"><i class="mdi-content-remove-circle"></i></a>
                         <a id="vc-saveplaylist" class="waves-effect waves-light btn disabled"><i class="mdi-av-playlist-add"></i></a>
                         <a id="vc-loadmore" class="waves-effect waves-light btn disabled"><i class="mdi-action-find-replace"></i></a>
+                        <div id="vc-mute" class="switch">
+                            <label>
+                                Unmuted
+                                <input type="checkbox">
+                                <span class="lever"></span>
+                                Muted
+                            </label>
+                        </div>
                     </div>
                     <div class="divider"></div>
                     <!-- TEMPLATE PLAYLIST ITEM -->
@@ -101,7 +106,7 @@
                                 <p class="author grey-text truncate"><a href="https://www.youtube.com/channel/{{PLAYLIST_VIDEO_AUTHOR_ID}}">{{PLAYLIST_VIDEO_AUTHOR}}</a></p>
                             </div>
                             <div class="col s2 playnow">
-                                <a class="btn-floating btn-small waves-effect waves-light red"><i class="mdi-av-play-circle-fill"></i></a>
+                                <a onclick="console.log(this.parentNode.parentNode)" class="btn-floating btn-small waves-effect waves-light red"><i class="mdi-av-play-circle-fill"></i></a>
                             </div>
                             <div class="divider"></div>
                         </div>
@@ -132,7 +137,7 @@
             var query = $("#search-query").val();
             $("#pld-title").html(query);
             $("#pld-description").html("Search results for \'"+query+"\', made into a playlist.");
-
+            $("#playlist-preview").empty()
             getPlaylistFromQuery(query,searchSuccessful);
         }
     });
@@ -153,6 +158,23 @@
         console.log("PLAYER RESET REQUESTED");
         reset();
     })
+
+    $($("#vc-mute").children()[0].children[0]).on("change",function(event){
+
+        var checked = $("#vc-mute").children()[0].children[0].checked;
+        try {
+            if(checked) {
+                player.mute();
+            }
+            else {
+                player.unMute();
+            }
+            console.log("ran");
+        }
+        catch(err) {
+            //
+        }
+    });
 
     </script>
 

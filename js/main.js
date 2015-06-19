@@ -3,6 +3,8 @@ var playlist = [];
 var currentIndex = 0;
 var maxResults = "50";
 var searchResults;
+var player;
+var muteAlways = false;
 
 var apiKey = "AIzaSyC5lG6cr07lMFM_NjAiL3M8kd0Kgmz92-I";
 
@@ -10,12 +12,39 @@ var apiKey = "AIzaSyC5lG6cr07lMFM_NjAiL3M8kd0Kgmz92-I";
 //https://www.googleapis.com/youtube/v3/videos?part=snippet&id=SK3NbwUrzwY&key=AIzaSyC5lG6cr07lMFM_NjAiL3M8kd0Kgmz92-I
 //https://www.googleapis.com/youtube/v3/channels?part=snippet&id=UCmWxBj64pEUXnM_AVgaRaMQ&key=AIzaSyC5lG6cr07lMFM_NjAiL3M8kd0Kgmz92-I
 
+function isMobile() {
+    var mobileWidths = [
+        320, //iPhone 5 and below, portrait
+        480, //iPhone 4s and below, landscape
+        568, //iPhone 5, landscape
+        375, //iPhone 6, portrait
+        667, //iPhone 6, landscape
+        414, //iPhone 6+, portrait
+        736, //iPhone 6+, landscape
+        384, //Nexus 4 and others, portait
+        640, //Standard Android, landscape
+        360, //Standard Android
+        533, //Nokia Lumia 520, landscape
+        1024, //iPad landscape
+        768, //iPad portrait
+    ];
+    for (var i in mobileWidths) {
+        if(document.body.clientWidth === mobileWidths[i]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 function reset() {
     $("#video-container").empty();
     $("#playlist-preview").empty();
     $("#search-query")[0].value = "";
+    $("#search-query").trigger(jQuery.Event("focusout"));
     $("#pld-title").html("Make a search");
     $("#pld-description").html("Go ahead, try \"Coldplay Midnight cover\"!");
+    $("#pld-progress").html("Video 1/&infin;");
 }
 
 function getPlaylistFromQuery(query,callback) {
@@ -88,7 +117,7 @@ function loadVideoWithIndex(index) {
     tempDiv.id = "videoPlayer";
     container.append(tempDiv);
 
-    var player = new YT.Player('videoPlayer', {
+    player = new YT.Player('videoPlayer', {
         videoId: String(playlist[index].videoId),
         events: {
             'onReady': onPlayerReady,
@@ -96,6 +125,9 @@ function loadVideoWithIndex(index) {
 
         }
     });
+    if($("#vc-mute").children()[0].children[0].checked === true) {
+        player.mute();
+    }
 }
 
 function onPlayerReady(event) {
