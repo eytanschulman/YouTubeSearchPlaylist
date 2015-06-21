@@ -10,3 +10,8 @@ MNI = idea, May Never Implement
 - [ ] Load more results functionality
 - [ ] Edit loaded playlist functionality
 - [ ] Save playlist to YouTube (MNI)
+
+
+
+
+Reference: http://i.imgur.com/P5PS33O.jpg
