@@ -75,13 +75,13 @@
                     </div>
                     <div class="divider"></div>
                     <div class="video-controls">
-                        <a id="vc-previous" class="waves-effect waves-light btn red"><i class="mdi-av-skip-previous"></i></a>
-                        <a id="vc-next" class="waves-effect waves-light btn red"><i class="mdi-av-skip-next"></i></a>
-                        <a id="vc-repeat" class="waves-effect waves-light btn disabled"><i class="mdi-av-repeat"></i></a>
-                        <a id="vc-shuffle" class="waves-effect waves-light btn disabled"><i class="mdi-av-shuffle"></i></a>
-                        <a id="vc-reset" class="waves-effect waves-light btn red"><i class="mdi-content-remove-circle"></i></a>
-                        <a id="vc-saveplaylist" class="waves-effect waves-light btn disabled"><i class="mdi-av-playlist-add"></i></a>
-                        <a id="vc-loadmore" class="waves-effect waves-light btn disabled"><i class="mdi-action-find-replace"></i></a>
+                        <a id="vc-previous" class="waves-effect waves-light btn red tooltipped" data-position="top" data-delay="50" data-tooltip="Previous video"><i class="mdi-av-skip-previous"></i></a>
+                        <a id="vc-next" class="waves-effect waves-light btn red tooltipped" data-position="top" data-delay="50" data-tooltip="Next video"><i class="mdi-av-skip-next"></i></a>
+                        <a id="vc-repeat" class="waves-effect waves-light btn disabled tooltipped" data-position="top" data-delay="50" data-tooltip="Repeat the playlist of videos"><i class="mdi-av-repeat"></i></a>
+                        <a id="vc-shuffle" class="waves-effect waves-light btn disabled tooltipped" data-position="top" data-delay="50" data-tooltip="Shuffle the playlist of videos"><i class="mdi-av-shuffle"></i></a>
+                        <a id="vc-reset" class="waves-effect waves-light btn red tooltipped" data-position="top" data-delay="50" data-tooltip="Reset"><i class="mdi-content-remove-circle"></i></a>
+                        <a id="vc-saveplaylist" class="waves-effect waves-light btn disabled tooltipped" data-position="top" data-delay="50" data-tooltip="Save this playlist"><i class="mdi-av-playlist-add"></i></a>
+                        <a id="vc-loadmore" class="waves-effect waves-light btn disabled tooltipped" data-position="top" data-delay="50" data-tooltip="Load more results"><i class="mdi-action-find-replace"></i></a>
                         <div id="vc-mute" class="switch">
                             <label>
                                 Unmuted
@@ -145,14 +145,24 @@
 
     $("#vc-previous").on("click tap",function(event){
         console.log("PREVIOUS VIDEO REQUESTED");
-        currentIndex -= 1;
-        loadVideoWithIndex(currentIndex);
+        if(currentIndex > 0) {
+            currentIndex -= 1;
+            loadVideoWithIndex(currentIndex);
+        }
+        else {
+            Materialize.toast("There is no previous video.",4000);
+        }
     });
 
     $("#vc-next").on("click tap",function(event){
         console.log("NEXT VIDEO REQUESTED");
-        currentIndex += 1;
-        loadVideoWithIndex(currentIndex);
+        if(currentIndex != playlist.length - 1) {
+            currentIndex += 1;
+            loadVideoWithIndex(currentIndex);
+        }
+        else {
+            Materialize.toast("There is no video after this one.",4000);
+        }
     });
 
     $("#vc-reset").on("click tap",function(event){
