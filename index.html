@@ -156,7 +156,7 @@
 
     $("#vc-next").on("click tap",function(event){
         console.log("NEXT VIDEO REQUESTED");
-        if(currentIndex != playlist.length - 1) {
+        if(currentIndex != playlist.length - 1 && playlist.length != 0) {
             currentIndex += 1;
             loadVideoWithIndex(currentIndex);
         }
