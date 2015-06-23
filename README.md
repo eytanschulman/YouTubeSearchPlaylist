@@ -5,3 +5,5 @@ I had the idea for this website because I love listening to covers of songs, but
 search results one after another. I also have never used JS that much, so I thought this might be a good time to try it out.
 
 You can view it [here.](http://eytanschulman.github.io/YouTubeSearchPlaylist/) 
+
+See [TODO.md](https://github.com/au5ton/YouTubeSearchPlaylist/blob/gh-pages/TODO.md).
