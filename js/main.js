@@ -6,7 +6,7 @@ var searchResults;
 var player;
 var muteAlways = false;
 
-var apiKey = "AIzaSyC5lG6cr07lMFM_NjAiL3M8kd0Kgmz92-I";
+var apiKey = "AIzaSyAkUMakzGsceYSdRLix6jWNFZDbogt5rXY";
 
 //Important URLs:
 //https://www.googleapis.com/youtube/v3/videos?part=snippet&id=SK3NbwUrzwY&key=AIzaSyC5lG6cr07lMFM_NjAiL3M8kd0Kgmz92-I
